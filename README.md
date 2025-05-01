@@ -59,4 +59,5 @@ Update Database Credentials: Open CLI FinTrack.py and update the database connec
 
 Run the application: After setting up the database, you can run the Python script:
 
+```bash
 python CLI_FinTrack.py   
