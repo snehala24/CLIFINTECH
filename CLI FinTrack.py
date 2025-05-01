@@ -78,6 +78,10 @@ class DatabaseHandler:
 
     def initialize_database(self):
         try:
+            # Check if the database exists; if not, create it
+            self.execute_query(f"CREATE DATABASE IF NOT EXISTS {self.database}")
+
+            # Create Users table
             self.execute_query("""
             CREATE TABLE IF NOT EXISTS Users (
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -88,6 +92,7 @@ class DatabaseHandler:
             );
             """)
 
+            # Create Expenses table
             self.execute_query("""
             CREATE TABLE IF NOT EXISTS Expenses (
                 expense_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -103,6 +108,22 @@ class DatabaseHandler:
             print("Database initialized successfully.")
         except Exception as e:
             print(f"Error initializing database: {e}")
+
+    # Insert a record into the database (for User registration)
+    def insert_record(self, query, params=()):
+        try:
+            conn = self.connect()
+            cursor = conn.cursor()
+            cursor.execute(query, params)
+            conn.commit()
+            return cursor.lastrowid  # Return the ID of the inserted record
+        except Error as e:
+            print(f"Error executing query: {e}")
+            raise
+        finally:
+            if conn.is_connected():
+                cursor.close()
+                conn.close()
 
 class UserManager:
     def __init__(self, db_handler):
@@ -220,8 +241,8 @@ class ReportGenerator:
 if __name__ == "__main__":
     host = 'localhost'
     user = 'root'
-    password = 'yourpassword'
-    database = 'expense_tracker'
+    password = 'Sn@240804'
+    database = 'fintrack'
 
     db_handler = DatabaseHandler(host, user, password, database)
     db_handler.initialize_database()
