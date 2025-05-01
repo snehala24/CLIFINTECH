@@ -30,3 +30,33 @@ Before running the project, make sure you have the following installed:
    ```bash
    git clone https://github.com/your-username/CLI-FinTrack.git
    cd CLI-FinTrack
+
+
+2. **Install MySQL Connector**:
+   ```bash
+   pip install mysql-connector-python
+
+3. pip install mysql-connector-python
+
+Set up the MySQL Database:
+
+    Open the MySQL terminal and create a new database:
+
+CREATE DATABASE IF NOT EXISTS fintrack;
+USE fintrack;
+
+Create the expenses table (if not already created):
+
+    CREATE TABLE IF NOT EXISTS expenses (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        amount FLOAT NOT NULL,
+        category VARCHAR(255) NOT NULL,
+        date DATE NOT NULL,
+        note TEXT
+    );
+
+Update Database Credentials: Open CLI FinTrack.py and update the database connection details (host, user, password) as per your MySQL setup.
+
+Run the application: After setting up the database, you can run the Python script:
+
+python CLI_FinTrack.py   
