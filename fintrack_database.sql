@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS fintrack;
+
+USE fintrack;
+
+CREATE TABLE IF NOT EXISTS expenses (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    amount FLOAT NOT NULL,
+    category VARCHAR(255) NOT NULL,
+    date DATE NOT NULL,
+    note TEXT
+);
